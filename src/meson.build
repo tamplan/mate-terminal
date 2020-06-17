@@ -1,3 +1,14 @@
+version_data = configuration_data()
+version_data.set('TERMINAL_MAJOR_VERSION', version_major)
+version_data.set('TERMINAL_MINOR_VERSION', version_minor)
+version_data.set('TERMINAL_MICRO_VERSION', version_micro)
+
+version_h = configure_file(
+  input: 'terminal-version.h.in',
+  output: 'terminal-version.h',
+  configuration: version_data,
+)
+
 cargs = [
   '-DG_LOG_DOMAIN="marco"',
   '-DTERMINAL_COMPILATION',
@@ -52,9 +63,9 @@ sources = [
   'terminal-tabs-menu.h',
   'terminal-util.c',
   'terminal-util.h',
-  'terminal-version.h',
   'terminal-window.c',
   'terminal-window.h',
+  version_h,
 ]
 
 sources += [
